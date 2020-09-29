@@ -2,9 +2,10 @@ project "GLFW"
 	location "%{wks.location}/engine/dependencies/glfw"
 	kind "StaticLib"
 	language "C"
+		staticruntime "on"
 	
-	targetdir ("%{prj.location}/bin/%{outputDir}")
-	objdir ("%{prj.location}/bin-int/%{outputDir}")
+	targetdir "%{binDir}"
+	objdir "%{binIntDir}"
 		
 	files {
 		"%{prj.location}/include/GLFW/glfw3.h",
@@ -19,10 +20,9 @@ project "GLFW"
 	}
 	
 	filter "system:linux"
-		pic "On"
+		pic "on"
 
 		systemversion "latest"
-		staticruntime "On"
 
 		files {
 			"%{prj.location}/src/x11_init.c",
@@ -43,7 +43,6 @@ project "GLFW"
 
 	filter "system:windows"
 		systemversion "latest"
-		staticruntime "On"
 
 		files {
 			"%{prj.location}/src/win32_init.c",
@@ -63,13 +62,13 @@ project "GLFW"
 		}
 	
 	filter "configurations:Development"
-		symbols "On"
+		symbols "on"
 		runtime "Debug"
 	
 	filter "configurations:Testing"
-		optimize "On"
+		optimize "on"
 		runtime "Release"
 	
 	filter "configurations:Production"
-		optimize "On"
+		optimize "on"
 		runtime "Release"
